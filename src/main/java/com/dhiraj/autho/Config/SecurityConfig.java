@@ -1,6 +1,5 @@
-package com.dhiraj.autho.Security;
+package com.dhiraj.autho.Config;
 
-import com.dhiraj.autho.Service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

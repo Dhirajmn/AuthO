@@ -1,6 +1,5 @@
-package com.dhiraj.autho.Security;
+package com.dhiraj.autho.Config;
 
-import com.dhiraj.autho.Service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -5,8 +5,9 @@ import com.dhiraj.autho.Dto.UserLoginRequest;
 import com.dhiraj.autho.Dto.UserRegisterRequest;
 import com.dhiraj.autho.Entity.User;
 import com.dhiraj.autho.Repository.UserRepository;
-import com.dhiraj.autho.Security.JwtService;
+import com.dhiraj.autho.Config.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,7 +49,10 @@ public class UserService {
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
             String jwt = jwtService.generateToken(request.getUsername());
-            return ResponseEntity.ok(new ApiResponse<>(true, jwt));
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                    .body(new ApiResponse<>(true, "login successful", null));
 
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(new ApiResponse<>(false, "Invalid username or password"), HttpStatus.UNAUTHORIZED);

@@ -1,4 +1,4 @@
-package com.dhiraj.autho.Security;
+package com.dhiraj.autho.Config;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

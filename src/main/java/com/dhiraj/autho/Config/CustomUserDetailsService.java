@@ -1,6 +1,5 @@
-package com.dhiraj.autho.Service;
+package com.dhiraj.autho.Config;
 
-import com.dhiraj.autho.Config.CustomUserDetails;
 import com.dhiraj.autho.Entity.User;
 import com.dhiraj.autho.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
