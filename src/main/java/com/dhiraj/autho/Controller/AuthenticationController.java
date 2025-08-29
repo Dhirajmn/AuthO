@@ -21,8 +21,8 @@ public class AuthenticationController {
         return userService.saveUser(request);
     }
 
-    @PostMapping("/login/email")
+    @PostMapping("/login")
     public ResponseEntity<ApiResponse<String>> login(@RequestBody UserLoginRequest request) {
-        userService.loginWithEmail(request);
+        return userService.authenticate(request);
     }
 }

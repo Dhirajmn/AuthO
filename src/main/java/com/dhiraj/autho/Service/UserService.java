@@ -5,6 +5,7 @@ import com.dhiraj.autho.Dto.UserLoginRequest;
 import com.dhiraj.autho.Dto.UserRegisterRequest;
 import com.dhiraj.autho.Entity.User;
 import com.dhiraj.autho.Repository.UserRepository;
+import com.dhiraj.autho.Security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class UserService {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
+    private final JwtService jwtService;
 
     public ResponseEntity<ApiResponse<String>> saveUser(UserRegisterRequest request) {
         if (userRepo.existsByUsername(request.getUsername())) {
@@ -44,10 +46,12 @@ public class UserService {
         try {
             Authentication auth = authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-            return new ResponseEntity<>(new ApiResponse<>(true, "Login successful"), HttpStatus.OK);
+
+            String jwt = jwtService.generateToken(request.getUsername());
+            return ResponseEntity.ok(new ApiResponse<>(true, jwt));
+
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(new ApiResponse<>(false, "Invalid username or password"), HttpStatus.UNAUTHORIZED);
         }
-
     }
 }
